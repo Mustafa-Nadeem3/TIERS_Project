@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import Sidebar from "../components/Sidebar";
-import { useNavigate } from "react-router-dom";
 
 const Booking = () => {
-  const navigate = useNavigate();
   const [serverData, setServerData] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [checkIn, setCheckIn] = useState(false);
+  const [checkOut, setCheckOut] = useState(false);
 
   async function getRooms() {
     try {
@@ -40,10 +40,17 @@ const Booking = () => {
       id = 5;
     } else {
       alert("Error Finding Room Type");
-      navigate("/booking");
+      window.location.href = "/booking";
     }
-    console.log(type)
-    console.log(id)
+    console.log(type);
+    console.log(id);
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+    const difference = checkOutDate.getTime() - checkInDate.getTime();
+    const numberOfNights = difference / (1000 * 60 * 60 * 24);
+    console.log(checkIn);
+    console.log(numberOfNights);
 
     try {
       const response = await fetch("http://localhost:5000/payment", {
@@ -52,18 +59,23 @@ const Booking = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          items: [{ id: id, quantity: 1 }],
+          id: id,
+          quantity: numberOfNights,
+          checkIn: checkIn,
+          checkOut: checkOut,
         }),
       });
 
       const data = await response.json();
       if (data) {
-        setServerData(data.rooms);
+        console.log(data);
+        window.location.href = data.url;
       } else {
-        alert("Error" + response);
         console.log(response);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function getImage(index) {
@@ -188,6 +200,10 @@ const Booking = () => {
                                     <input
                                       type="date"
                                       id="checkIn"
+                                      value={checkIn}
+                                      onChange={(e) =>
+                                        setCheckIn(e.target.value)
+                                      }
                                       className="form-control"
                                     />
                                   </div>
@@ -201,6 +217,10 @@ const Booking = () => {
                                     <input
                                       type="date"
                                       id="checkOut"
+                                      value={checkOut}
+                                      onChange={(e) =>
+                                        setCheckOut(e.target.value)
+                                      }
                                       className="form-control"
                                     />
                                   </div>
