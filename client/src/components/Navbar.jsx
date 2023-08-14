@@ -29,50 +29,41 @@ function Navbar(props) {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
               <ul className={props.main_links}>
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-primary d-flex"
-                    href="#intro"
-                  >
-                    <div>
-                      
+                  <a className="nav-link text-primary d-flex" href="#intro">
+                    <div></div>
+                    <div className="mt-1">
+                      <i class="fa-solid fa-hotel me-2"></i>Home
                     </div>
-                    <div className="mt-1">Home</div>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-primary d-flex"
-                    href="#about"
-                  >
-                    <div>
-                      
+                  <a className="nav-link text-primary d-flex" href="#room">
+                    <div></div>
+                    <div className="mt-1">
+                      <i class="fa-solid fa-bed me-2"></i>Room
                     </div>
-                    <div className="mt-1">Room</div>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-primary d-flex"
-                    href="#room"
-                  >
-                    <div>
-                      
+                  <a className="nav-link text-primary d-flex" href="#services">
+                    <div></div>
+                    <div className="mt-1">
+                      <i class="fa-solid fa-bell-concierge me-2"></i>Services
                     </div>
-                    <div className="mt-1">Services</div>
                   </a>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    className="nav-link text-primary d-flex"
-                    to="/book"
-                  >
-                    <div>
-                      
+                  <Link className="nav-link text-primary d-flex" to="/rooms">
+                    <div></div>
+                    <div className="mt-1">
+                      <i class="fa-solid fa-book me-2"></i>Book
                     </div>
-                    <div className="mt-1">Book</div>
                   </Link>
                 </li>
               </ul>
@@ -82,9 +73,7 @@ function Navbar(props) {
                     className="nav-link login_btn text-white d-flex"
                     to={props.last_link_path}
                   >
-                    <div>
-                      
-                    </div>
+                    <div></div>
                     <div className="mt-1">{props.last_link_name}</div>
                   </Link>
                 </li>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -10,6 +10,7 @@ const Home = () => {
   const [isHovered4, setIsHovered4] = useState(false);
   const [isHovered5, setIsHovered5] = useState(false);
   const [isHovered6, setIsHovered6] = useState(false);
+  const [serverData, setServerData] = useState("");
 
   const handleMouseEnterCard1 = () => {
     setIsHovered1(true);
@@ -59,6 +60,30 @@ const Home = () => {
     setIsHovered6(false);
   };
 
+  async function getComments() {
+    try {
+      const response = await fetch("http://localhost:5000/comments", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      if (data) {
+        setServerData(data.comments);
+      } else {
+        alert("Error" + response);
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   return (
     <>
       <Navbar last_link_path="/login" last_link_name="Login" />
@@ -71,56 +96,6 @@ const Home = () => {
         <div className="container">
           <h1 className="text-white">Welcome to Hotel Haven</h1>
           <p></p>
-        </div>
-      </section>
-      {/* About Section */}
-      <section id="about">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 col-sm-12 mt-3 stats">
-              <div className="col-lg-4 col-sm-12 col-md-6 me-md-3 me-lg-3 mb-3">
-                <div
-                  class="card shadow border-0"
-                >
-                  <div class="card-body mx-auto text-center">
-                    <h1 class="card-title">0</h1>
-                    <div className="d-flex">
-                      <h4 class="card-text me-3 text-primary">Rooms</h4>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-sm-12 col-md-6 me-lg-3 mb-3">
-                <div
-                  class="card shadow border-0"
-                  
-                >
-                  <div class="card-body mx-auto text-center">
-                    <h1 class="card-title">0</h1>
-                    <div className="d-flex">
-                      <h4 class="card-text me-3 text-primary">Rooms</h4>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4 col-sm-12 col-md-6">
-                <div
-                  class="card shadow border-0"
-                  
-                >
-                  <div class="card-body mx-auto text-center">
-                    <h1 class="card-title">0</h1>
-                    <div className="d-flex">
-                      <h4 class="card-text me-3 text-primary">Rooms</h4>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
       {/* Room Section */}
@@ -433,7 +408,7 @@ const Home = () => {
                             src={
                               process.env.PUBLIC_URL + "/images/laundry.jpeg"
                             }
-                            class="card-img-top w-100 h-100"
+                            class="card-img-top"
                             alt="Laundry"
                           />
                           <div
@@ -443,10 +418,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Laundry</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -459,10 +437,11 @@ const Home = () => {
                         >
                           <img
                             src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
+                              process.env.PUBLIC_URL +
+                              "/images/valet-parking.jpg"
                             }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            class="card-img-top"
+                            alt="Valet-parking"
                           />
                           <div
                             class={
@@ -471,10 +450,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Valet parking</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -487,10 +469,11 @@ const Home = () => {
                         >
                           <img
                             src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
+                              process.env.PUBLIC_URL +
+                              "/images/fitness-center.jpg"
                             }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            class="card-img-top"
+                            alt="Fitness-center"
                           />
                           <div
                             class={
@@ -499,10 +482,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Fitness center</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -518,11 +504,9 @@ const Home = () => {
                           onMouseLeave={handleMouseLeaveCard4}
                         >
                           <img
-                            src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
-                            }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            src={process.env.PUBLIC_URL + "/images/cafe.jpg"}
+                            class="card-img-top"
+                            alt="Cafe"
                           />
                           <div
                             class={
@@ -531,10 +515,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Cafe</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -547,10 +534,10 @@ const Home = () => {
                         >
                           <img
                             src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
+                              process.env.PUBLIC_URL + "/images/restaurant.jpg"
                             }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            class="card-img-top"
+                            alt="Restaurant"
                           />
                           <div
                             class={
@@ -559,10 +546,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Restaurant</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -575,10 +565,11 @@ const Home = () => {
                         >
                           <img
                             src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
+                              process.env.PUBLIC_URL +
+                              "/images/swimming-pool.jpg"
                             }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            class="card-img-top"
+                            alt="Swimming pool"
                           />
                           <div
                             class={
@@ -587,10 +578,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Swimming pool</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -644,7 +638,7 @@ const Home = () => {
                       >
                         <img
                           src={process.env.PUBLIC_URL + "/images/laundry.jpeg"}
-                          class="card-img-top w-100 h-100"
+                          class="card-img-top"
                           alt="Laundry"
                         />
                         <div
@@ -656,8 +650,11 @@ const Home = () => {
                         >
                           <h5 class="card-title">Card title</h5>
                           <p class="card-text">
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Doloremque dolor alias dicta non, mollitia
+                            voluptatem, vitae quod cumque esse aperiam odio
+                            provident totam consectetur. Maxime quibusdam nihil
+                            quidem aliquam mollitia!
                           </p>
                         </div>
                       </div>
@@ -671,9 +668,11 @@ const Home = () => {
                         onMouseLeave={handleMouseLeaveCard2}
                       >
                         <img
-                          src={process.env.PUBLIC_URL + "/images/laundry.jpeg"}
-                          class="card-img-top w-100 h-100"
-                          alt="Laundry"
+                          src={
+                            process.env.PUBLIC_URL + "/images/valet-parking.jpg"
+                          }
+                          class="card-img-top"
+                          alt="Valet-parking"
                         />
                         <div
                           class={
@@ -682,10 +681,13 @@ const Home = () => {
                               : "card-body card-hide"
                           }
                         >
-                          <h5 class="card-title">Card title</h5>
+                          <h5 class="card-title">Valet parking</h5>
                           <p class="card-text">
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Doloremque dolor alias dicta non, mollitia
+                            voluptatem, vitae quod cumque esse aperiam odio
+                            provident totam consectetur. Maxime quibusdam nihil
+                            quidem aliquam mollitia!
                           </p>
                         </div>
                       </div>
@@ -699,9 +701,12 @@ const Home = () => {
                         onMouseLeave={handleMouseLeaveCard3}
                       >
                         <img
-                          src={process.env.PUBLIC_URL + "/images/laundry.jpeg"}
-                          class="card-img-top w-100 h-100"
-                          alt="Laundry"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/images/fitness-center.jpg"
+                          }
+                          class="card-img-top"
+                          alt="Fitness-center"
                         />
                         <div
                           class={
@@ -710,10 +715,13 @@ const Home = () => {
                               : "card-body card-hide"
                           }
                         >
-                          <h5 class="card-title">Card title</h5>
+                          <h5 class="card-title">Fitness center</h5>
                           <p class="card-text">
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Doloremque dolor alias dicta non, mollitia
+                            voluptatem, vitae quod cumque esse aperiam odio
+                            provident totam consectetur. Maxime quibusdam nihil
+                            quidem aliquam mollitia!
                           </p>
                         </div>
                       </div>
@@ -728,11 +736,9 @@ const Home = () => {
                           onMouseLeave={handleMouseLeaveCard4}
                         >
                           <img
-                            src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
-                            }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            src={process.env.PUBLIC_URL + "/images/cafe.jpeg"}
+                            class="card-img-top"
+                            alt="Cafe"
                           />
                           <div
                             class={
@@ -741,10 +747,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Cafe</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -757,10 +766,10 @@ const Home = () => {
                         >
                           <img
                             src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
+                              process.env.PUBLIC_URL + "/images/restaurant.jpeg"
                             }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            class="card-img-top"
+                            alt="Restaurant"
                           />
                           <div
                             class={
@@ -769,10 +778,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Restaurant</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -785,10 +797,11 @@ const Home = () => {
                         >
                           <img
                             src={
-                              process.env.PUBLIC_URL + "/images/laundry.jpeg"
+                              process.env.PUBLIC_URL +
+                              "/images/swimming-pool.jpeg"
                             }
-                            class="card-img-top w-100 h-100"
-                            alt="Laundry"
+                            class="card-img-top"
+                            alt="Swimming-pool"
                           />
                           <div
                             class={
@@ -797,10 +810,13 @@ const Home = () => {
                                 : "card-body card-hide"
                             }
                           >
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title">Swimming pool</h5>
                             <p class="card-text">
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Doloremque dolor alias dicta non, mollitia
+                              voluptatem, vitae quod cumque esse aperiam odio
+                              provident totam consectetur. Maxime quibusdam
+                              nihil quidem aliquam mollitia!
                             </p>
                           </div>
                         </div>
@@ -872,7 +888,7 @@ const Home = () => {
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <div className="col-12 text-center">
-                      <h3>Name</h3>
+                      <h3>{serverData.name || "No Name Found"}</h3>
                     </div>
                     <div className="col-6 mx-auto">
                       <div className="quote-alt">
@@ -882,7 +898,7 @@ const Home = () => {
                         />
                       </div>
                       <div className="text-center">
-                        <h6>Comment</h6>
+                        <h6>{serverData.comment|| "No Comment Found"}</h6>
                       </div>
                       <div className="text-end">
                         <img
@@ -892,9 +908,14 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="col-12 text-center">
-                      <p>Stars</p>
+                      <p>{serverData.stars || "No Stars Found"}</p>
                     </div>
                   </div>
+                  {/* {serverData && serverData.length > 0 ? (
+                    serverData.map((data, index) => (
+
+                    ))
+                  ):(<h6>No data found</h6>)} */}
                   <div class="carousel-item">
                     <div className="col-12 text-center">
                       <h3>Name</h3>

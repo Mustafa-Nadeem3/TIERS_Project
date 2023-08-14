@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
       address: null,
       phoneNumber: null,
       image: null,
+      type: "user",
     });
 
     res.json({ status: "ok", user: user });

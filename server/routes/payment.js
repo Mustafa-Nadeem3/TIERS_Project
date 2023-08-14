@@ -37,8 +37,8 @@ router.post("/", async (req, res) => {
         check_in: checkIn,
         check_out: checkOut,
       },
-      success_url: "http://localhost:3000/dashboard",
-      cancel_url: "http://localhost:3000/booking",
+      success_url: "http://localhost:3000/booking?payment=success",
+      cancel_url: "http://localhost:3000/booking?payment=cancel",
     });
 
     const session1 = await stripe.checkout.sessions.retrieve(session.id);

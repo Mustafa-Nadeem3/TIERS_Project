@@ -53,42 +53,49 @@ const Footer = () => {
                   className="d-flex"
                 >
                   <Link to="#home" class="fs-5 text-decoration-none text-white">
-                    Home
+                  <i class="fa-solid fa-arrow-right"></i><span>Home</span>
                   </Link>
                 </li>
                 <li
                   className="d-flex"
                 >
                   <Link to="#about" class="fs-5 text-decoration-none text-white">
-                    About
+                  <i class="fa-solid fa-arrow-right"></i><span>About</span>
                   </Link>
                 </li>
                 <li
                   className="d-flex"
                 >
                   <Link to="#room" class="fs-5 text-decoration-none text-white">
-                    Rooms
+                  <i class="fa-solid fa-arrow-right"></i><span>Rooms</span>
                   </Link>
                 </li>
                 <li
                   className="d-flex"
                 >
                   <Link to="#services" class="fs-5 text-decoration-none text-white">
-                    Services
+                  <i class="fa-solid fa-arrow-right"></i><span>Services</span>
                   </Link>
                 </li>
                 <li
                   className="d-flex"
                 >
                   <Link to="#comment" class="fs-5 text-decoration-none text-white">
-                    Comments
+                  <i class="fa-solid fa-arrow-right"></i><span>Comments</span>
+                  </Link>
+                </li>
+                <li
+                  className="d-flex"
+                >
+                  <Link to="/rooms" class="fs-5 text-decoration-none text-white">
+                  <i class="fa-solid fa-arrow-right"></i><span>Book Now</span>
                   </Link>
                 </li>
                 <li
                   className="d-flex"
                 >
                   <Link to="/login" class="fs-5 text-decoration-none text-white">
-                    Login
+                  <i class="fa-solid fa-arrow-right"></i><span>Login</span>
                   </Link>
                 </li>
               </ul>

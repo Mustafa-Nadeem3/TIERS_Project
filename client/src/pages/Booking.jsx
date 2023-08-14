@@ -3,10 +3,15 @@ import { Modal } from "react-bootstrap";
 import Sidebar from "../components/Sidebar";
 
 const Booking = () => {
-  const [serverData, setServerData] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [checkIn, setCheckIn] = useState(false);
-  const [checkOut, setCheckOut] = useState(false);
+  const [serverData, setServerData] = useState([]);
+  const [userData, setUserData] = useState("");
+  const availableRooms = serverData.filter((room) => room.available === true);
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [roomNumber, setRoomNumber] = useState("");
+  const [roomType, setRoomType] = useState("");
+  const [numberOfAdults, setNumberOfAdults] = useState("");
+  const [numberOfChildren, setNumberOfChildren] = useState("");
 
   async function getRooms() {
     try {
@@ -26,8 +31,31 @@ const Booking = () => {
     } catch (error) {}
   }
 
-  async function handlePayment(type) {
+  async function getUserData() {
+    try {
+      const response = await fetch("http://localhost:5000/user", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      });
+
+      const data = await response.json();
+      if (data) {
+        setUserData(data.user);
+        console.log(data);
+      } else {
+        alert("Error Finding User");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  }
+
+  async function handlePayment(number, type) {
+    setRoomNumber(number)
+    setRoomType(type)
     let id = 0;
+    console.log(type)
     if (type === "Standard") {
       id = 1;
     } else if (type === "Deluxe") {
@@ -42,8 +70,6 @@ const Booking = () => {
       alert("Error Finding Room Type");
       window.location.href = "/booking";
     }
-    console.log(type);
-    console.log(id);
 
     const checkInDate = new Date(checkIn);
     const checkOutDate = new Date(checkOut);
@@ -78,6 +104,35 @@ const Booking = () => {
     }
   }
 
+  async function handleBook() {
+    try {
+      const response = await fetch("http://localhost:5000/booked", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: userData._id,
+          roomNumber: roomNumber,
+          name: userData.name,
+          adults: numberOfAdults,
+          children: numberOfChildren,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          roomType: roomType,
+        }),
+      });
+
+      const data = await response.json();
+      if (data) {
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function getImage(index) {
     if (serverData[index].type === "Standard") {
       return `${process.env.PUBLIC_URL}/images/standard-room.jpg`;
@@ -86,12 +141,36 @@ const Booking = () => {
     }
   }
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+  const [modalIsOpen, setModalIsOpen] = useState(Array(serverData.length).fill(false));
+
+  const openModal = (index) => {
+    setModalIsOpen((prevState) => {
+      const newState = [...prevState]
+      newState[index] = true
+      return newState
+    })
+  }
+
+  const closeModal = (index) => {
+    setModalIsOpen((prevState) => {
+      const newState = [...prevState]
+      newState[index] = false
+      return newState
+    })
+  }
 
   useEffect(() => {
     getRooms();
+    getUserData();
+    const searchParams = new URLSearchParams(window.location.search);
+    const payment = searchParams.get("payment");
+
+    if (payment === "success") {
+      alert("Payment successful");
+      handleBook();
+    } else if (payment === "cancel") {
+      alert("Payment unsuccessful please try again!");
+    }
   }, []);
 
   return (
@@ -128,8 +207,8 @@ const Booking = () => {
               </form>
             </div>
             <div className="col-12 p-3">
-              {serverData && serverData.length > 0 ? (
-                serverData.map((room, index) => (
+              {availableRooms && availableRooms.length > 0 ? (
+                availableRooms.map((room, index) => (
                   <div key={index} className="row mb-3">
                     <div className="col-12 d-flex">
                       <div className="col-6 text-center my-auto">
@@ -138,8 +217,7 @@ const Booking = () => {
                           Room Number: {room.number}
                         </h4>
                         <h4 className="text-black fw-normal">
-                          Availability:{" "}
-                          {room.availability ? "Available" : "Not Available"}
+                          {room.availability ? "Not Available" : "Available"}
                         </h4>
                         <div className="d-flex justify-content-center align-items-center mt-5">
                           <h4 className="text-black fw-normal my-auto me-3">
@@ -147,20 +225,17 @@ const Booking = () => {
                             Price: Rs {room.price}
                           </h4>
                           <button
-                            onClick={toggleModal}
+                            onClick={() => openModal(index)}
                             className="btn btn-primary"
                           >
                             <i class="fa-solid fa-file-pen me-2"></i>Book
                           </button>
-                          <Modal show={showModal} onHide={toggleModal} centered>
+                          <Modal show={modalIsOpen[index]} onHide={() => closeModal(index)} centered>
                             <Modal.Header closeButton>
                               <Modal.Title>Booking: {room.type}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                               <form>
-                                <div className="col-12">
-                                  <p>{room.type}</p>
-                                </div>
                                 <div className="col-12 d-flex mb-3">
                                   <div className="col-6 me-2">
                                     <label
@@ -173,6 +248,10 @@ const Booking = () => {
                                       type="number"
                                       id="adults"
                                       className="form-control"
+                                      value={numberOfAdults}
+                                      onChange={(e) =>
+                                        setNumberOfAdults(e.target.value)
+                                      }
                                     />
                                   </div>
                                   <div className="col-6">
@@ -186,6 +265,10 @@ const Booking = () => {
                                       type="number"
                                       id="child"
                                       className="form-control"
+                                      value={numberOfChildren}
+                                      onChange={(e) =>
+                                        setNumberOfChildren(e.target.value)
+                                      }
                                     />
                                   </div>
                                 </div>
@@ -238,7 +321,7 @@ const Booking = () => {
                                 className="btn btn-primary"
                                 type="submit"
                                 onClick={() => {
-                                  handlePayment(room.type);
+                                  handlePayment(room.number, room.type);
                                 }}
                               >
                                 <i class="fa-solid fa-receipt me-2"></i>Payment

@@ -2,9 +2,20 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 
 const Dashboard = () => {
+
   return (
     <>
-      <Sidebar icon1="fa-solid fa-home text-white active" link1="Dashboard" path1="/dashboard" icon2="fa-solid fa-user" link2="Profile" path2="/profile" icon3="fa-solid fa-book" link3="Booking" path3="/booking" />
+      <Sidebar
+        icon1="fa-solid fa-home text-white active"
+        link1="Dashboard"
+        path1="/dashboard"
+        icon2="fa-solid fa-user"
+        link2="Profile"
+        path2="/profile"
+        icon3="fa-solid fa-book"
+        link3="Booking"
+        path3="/booking"
+      />
       <section id="content">
         <div className="container-fluid">
           <div className="row">

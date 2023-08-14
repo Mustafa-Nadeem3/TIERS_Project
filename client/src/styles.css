@@ -87,7 +87,8 @@ nav .container {
 #about h1,
 #room h1,
 #services h1,
-#comment h1 {
+#comment h1,
+#hotel-room h1 {
   font-size: 2.5rem; /* 40px converted to rem */
   font-weight: 43.75rem;
   color: #000080;
@@ -159,6 +160,11 @@ nav .container {
   background-color: rgb(0, 0, 128);
 }
 
+#services img {
+  width: 26.5vw;
+  height: 40vh;
+}
+
 #comment .container {
   margin-top: 3.125rem;
 }
@@ -184,6 +190,15 @@ nav .container {
   width: 1.5625rem;
   height: 1.5625rem;
   margin-top: 0.125rem;
+}
+
+#footer span {
+  margin-left: 1rem;
+  transition: 1s ease;
+}
+
+#footer span:hover {
+  margin-left: 0.5rem;
 }
 
 #account .container {
@@ -225,6 +240,12 @@ nav .container {
 
 #mobile_account {
   display: none;
+}
+
+#hotel-room .container {
+  width: 100vw;
+  margin-top: 3.125rem;
+
 }
 
 #sidebar {
@@ -295,7 +316,8 @@ nav .container {
 
 #content,
 #profile,
-#booking {
+#booking,
+#admin {
   width: 95vw;
   height: 100vh;
   margin-left: 5vw;
@@ -304,7 +326,8 @@ nav .container {
 
 #content h4,
 #profile h4,
-#booking h4 {
+#booking h4,
+#admin h4 {
   color: #000080;
   font-weight: bold;
 }
@@ -318,6 +341,29 @@ nav .container {
   justify-content: center;
 }
 
+#admin .card {
+  width: 30vw;
+  height: fit-content;
+}
+
+#admin h1 {
+  display: inline-block;
+  color: #000080;
+  transform: translateY(100%);
+  opacity: 0;
+  animation: countAnimation 2s ease-in-out forwards;
+}
+
+@keyframes countAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* Tablet */
 @media only screen and (max-width: 48rem) {

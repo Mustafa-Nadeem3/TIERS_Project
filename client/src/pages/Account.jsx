@@ -126,7 +126,7 @@ const Account = () => {
       const data = await response.json();
 
       if (data.user === true) {
-        if (data.user._id === "64d7c5ce200db2d0e85452d1") {
+        if (data.type === "admin") {
           window.location.href = "/admin_dashboard";
         } else {
           localStorage.setItem("token", data.token);

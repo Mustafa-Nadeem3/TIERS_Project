@@ -7,9 +7,9 @@ const Booking = new mongoose.Schema(
     name: { type: String, required: true },
     adults: { type: String, required: true },
     children: { type: String, required: true },
-    rooms: { type: String, required: true },
     checkInDate: { type: Date, required: true },
     checkOutDate: { type: Date, required: true },
+    roomType: { type: String, required: true },
   },
   { collection: "booking-data" }
 );

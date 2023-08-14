@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Booking from "./pages/Booking";
+import Rooms from "./pages/Rooms";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/login" element={<Account />} />
+          <Route path="/rooms" element={<Rooms />} />
           <Route path="/admin_dashboard" element={<AdminDashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />

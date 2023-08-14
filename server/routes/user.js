@@ -20,6 +20,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/all_users", async (req, res) => {
+  try {
+    const users = await User.find({});
+
+    res.json({ status: "ok", users: users });
+  } catch (error) {
+    console.error("User error:", error);
+    res.status(500).json({ status: "error", message: "An error occurred" });
+  }
+});
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../../client/public/uploads");
@@ -50,7 +61,7 @@ router.post("/profile", upload.single("image"), async (req, res) => {
           data: req.file.filename,
           contentType: "image/" + path.extname(req.file.originalname),
         },
-      },
+      }
     );
     res.json({ status: "ok", user: user });
   } catch (error) {

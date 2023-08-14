@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
         },
         "secret123"
       );
-      res.json({ status: "ok", user: true, token: token });
+      res.json({ status: "ok", user: true, token: token, type: user.type });
     } else {
       res.json({ status: "ok", user: false });
     }
