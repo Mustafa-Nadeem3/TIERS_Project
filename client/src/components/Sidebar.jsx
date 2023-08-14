@@ -32,7 +32,7 @@ function Sidebar(props) {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [getUserData()]);
 
   const showSidebarContent = () => {
     if (showBar === false) {

@@ -73,7 +73,7 @@ const Rooms = () => {
               {availableRooms && availableRooms.length > 0 ? (
                 availableRooms.map((room, index) => (
                   <div key={index}>
-                    <div className={index % 2 == 0 ? "row mb-3" : "row mb-3 d-none"}>
+                    <div className={index % 2 === 0 ? "row mb-3" : "row mb-3 d-none"}>
                       <div className="row d-flex">
                         <div className="col-lg-6 col-md-6 col-sm-12 text-center my-auto">
                           <h2 className="text-primary fw-bold">{room.type}</h2>
@@ -98,7 +98,7 @@ const Rooms = () => {
                         </div>
                       </div>
                     </div>
-                    <div className={index % 2 == 0 ? "row mb-3 d-none" : "row mb-3"}>
+                    <div className={index % 2 === 0 ? "row mb-3 d-none" : "row mb-3"}>
                       <div className="row d-flex">
                         <div className="col-lg-6 col-md-6 col-sm-12 text-start">
                           <img src={getImage(index)} alt="Room" />
