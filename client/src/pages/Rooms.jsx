@@ -16,7 +16,7 @@ const Rooms = () => {
 
   async function getRooms() {
     try {
-      const response = await fetch("http://localhost:5000/room", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/room", {
         headers: {
           "Content-Type": "application/json",
         },

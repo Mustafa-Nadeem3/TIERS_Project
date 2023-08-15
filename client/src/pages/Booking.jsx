@@ -15,7 +15,7 @@ const Booking = () => {
 
   async function getRooms() {
     try {
-      const response = await fetch("http://localhost:5000/room", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/room", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,7 +33,7 @@ const Booking = () => {
 
   async function getUserData() {
     try {
-      const response = await fetch("http://localhost:5000/user", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/user", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -79,7 +79,7 @@ const Booking = () => {
     console.log(numberOfNights);
 
     try {
-      const response = await fetch("http://localhost:5000/payment", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const Booking = () => {
 
   async function handleBook() {
     try {
-      const response = await fetch("http://localhost:5000/booked", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/booked", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

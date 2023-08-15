@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
   async function getRooms() {
     try {
-      const response = await fetch("http://localhost:5000/room", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/room", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
 
   async function getUsers() {
     try {
-      const response = await fetch("http://localhost:5000/user/all_users", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/user/all_users", {
         headers: {
           "Content-Type": "application/json",
         },

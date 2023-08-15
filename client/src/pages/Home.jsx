@@ -62,7 +62,7 @@ const Home = () => {
 
   async function getComments() {
     try {
-      const response = await fetch("http://localhost:5000/comments", {
+      const response = await fetch("http://dazzling-marble-room.glitch.me/server/comments", {
         headers: {
           "Content-Type": "application/json",
         },
