@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "../styles.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Account = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [form, setForm] = useState(false);
@@ -72,19 +73,22 @@ const Account = () => {
 
     if (password === confirmPassword) {
       try {
-        const response = await fetch("https://hotel-haven.onrender.com/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-            gender: gender,
-          }),
-        });
+        const response = await fetch(
+          "https://hotel-haven.onrender.com/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+              gender: gender,
+            }),
+          }
+        );
 
         if (response.ok) {
           if (form === true && screenWidth < 786) {
@@ -127,10 +131,10 @@ const Account = () => {
 
       if (data.user === true) {
         if (data.type === "admin") {
-          window.location.href = "https://hotel-haven.netlify.app/admin_dashboard";
+          navigate("/admin_dashboard");
         } else {
           localStorage.setItem("token", data.token);
-          window.location.href = "https://hotel-haven.netlify.app/dashboard";
+          navigate("/dashboard");
         }
       } else if (data.user === false) {
         const passwordInput = document.getElementById("password");
