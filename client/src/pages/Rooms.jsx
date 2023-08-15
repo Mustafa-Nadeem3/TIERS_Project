@@ -16,7 +16,7 @@ const Rooms = () => {
 
   async function getRooms() {
     try {
-      const response = await fetch("http://localhost:5000/room", {
+      const response = await fetch("https://hotel-haven.onrender.com/room", {
         headers: {
           "Content-Type": "application/json",
         },

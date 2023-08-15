@@ -26,7 +26,7 @@ const Profile = () => {
 
   async function setProfile() {
     try {
-      const response = await fetch("http://localhost:5000/user/profile", {
+      const response = await fetch("https://hotel-haven.onrender.com/user/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const Profile = () => {
 
   async function getProfile() {
     try {
-      const response = await fetch("http://localhost:5000/user", {
+      const response = await fetch("https://hotel-haven.onrender.com/user", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

@@ -72,7 +72,7 @@ const Account = () => {
 
     if (password === confirmPassword) {
       try {
-        const response = await fetch("http://localhost:5000/register", {
+        const response = await fetch("https://hotel-haven.onrender.com/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const Account = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("https://hotel-haven.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
