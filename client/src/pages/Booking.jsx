@@ -171,7 +171,7 @@ const Booking = () => {
     } else if (payment === "cancel") {
       alert("Payment unsuccessful please try again!");
     }
-  }, [handleBook()]);
+  }, []);
 
   return (
     <>
