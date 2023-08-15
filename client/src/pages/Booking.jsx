@@ -15,7 +15,7 @@ const Booking = () => {
 
   async function getRooms() {
     try {
-      const response = await fetch("http://dazzling-marble-room.glitch.me/server/room", {
+      const response = await fetch("http://localhost:5000/room", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,7 +33,7 @@ const Booking = () => {
 
   async function getUserData() {
     try {
-      const response = await fetch("http://dazzling-marble-room.glitch.me/server/user", {
+      const response = await fetch("http://localhost:5000/user", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -52,10 +52,10 @@ const Booking = () => {
   }
 
   async function handlePayment(number, type) {
-    setRoomNumber(number);
-    setRoomType(type);
+    setRoomNumber(number)
+    setRoomType(type)
     let id = 0;
-    console.log(type);
+    console.log(type)
     if (type === "Standard") {
       id = 1;
     } else if (type === "Deluxe") {
@@ -79,7 +79,7 @@ const Booking = () => {
     console.log(numberOfNights);
 
     try {
-      const response = await fetch("http://dazzling-marble-room.glitch.me/server/payment", {
+      const response = await fetch("http://localhost:5000/payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const Booking = () => {
 
   async function handleBook() {
     try {
-      const response = await fetch("http://dazzling-marble-room.glitch.me/server/booked", {
+      const response = await fetch("http://localhost:5000/booked", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -141,25 +141,23 @@ const Booking = () => {
     }
   }
 
-  const [modalIsOpen, setModalIsOpen] = useState(
-    Array(serverData.length).fill(false)
-  );
+  const [modalIsOpen, setModalIsOpen] = useState(Array(serverData.length).fill(false));
 
   const openModal = (index) => {
     setModalIsOpen((prevState) => {
-      const newState = [...prevState];
-      newState[index] = true;
-      return newState;
-    });
-  };
+      const newState = [...prevState]
+      newState[index] = true
+      return newState
+    })
+  }
 
   const closeModal = (index) => {
     setModalIsOpen((prevState) => {
-      const newState = [...prevState];
-      newState[index] = false;
-      return newState;
-    });
-  };
+      const newState = [...prevState]
+      newState[index] = false
+      return newState
+    })
+  }
 
   useEffect(() => {
     getRooms();
@@ -232,11 +230,7 @@ const Booking = () => {
                           >
                             <i class="fa-solid fa-file-pen me-2"></i>Book
                           </button>
-                          <Modal
-                            show={modalIsOpen[index]}
-                            onHide={() => closeModal(index)}
-                            centered
-                          >
+                          <Modal show={modalIsOpen[index]} onHide={() => closeModal(index)} centered>
                             <Modal.Header closeButton>
                               <Modal.Title>Booking: {room.type}</Modal.Title>
                             </Modal.Header>
