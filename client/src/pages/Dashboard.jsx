@@ -10,19 +10,21 @@ const Dashboard = () => {
     try {
       const response = await fetch("https://hotel-haven.onrender.com/user", {
         headers: {
-          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
         },
       });
 
       const data = await response.json();
       if (data) {
         setServerData(data.user);
+        console.log(data);
       } else {
-        alert("Error" + response);
-        console.log(response);
+        alert("Error Finding User");
+        localStorage.remove("token");
+        navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Network error:", error);
     }
   }
 
