@@ -332,6 +332,30 @@ nav .container {
   font-weight: bold;
 }
 
+.rating {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  text-align: center;
+  color: #d3d3d3;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label:before {
+  content: "\2605";
+}
+
+.rating input:checked ~ label {
+  color: #000080;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #000080;
+}
+
 #profile img {
   width: 17vw;
   height: 24vh;
