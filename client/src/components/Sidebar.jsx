@@ -30,9 +30,11 @@ function Sidebar(props) {
     }
   }
 
+  const getUserDataFunction = getUserData;
+
   useEffect(() => {
-    getUserData();
-  }, []);
+    getUserDataFunction();
+  }, [getUserDataFunction]);
 
   const showSidebarContent = () => {
     if (showBar === false) {

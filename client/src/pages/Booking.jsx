@@ -159,6 +159,8 @@ const Booking = () => {
     })
   }
 
+  const handleBookFunction = handleBook
+
   useEffect(() => {
     getRooms();
     getUserData();
@@ -167,11 +169,11 @@ const Booking = () => {
 
     if (payment === "success") {
       alert("Payment successful");
-      handleBook();
+      handleBookFunction();
     } else if (payment === "cancel") {
       alert("Payment unsuccessful please try again!");
     }
-  }, []);
+  }, [handleBookFunction]);
 
   return (
     <>
