@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const Booking = () => {
+  const navigate = useNavigate();
   const [serverData, setServerData] = useState([]);
   const [userData, setUserData] = useState("");
   const availableRooms = serverData.filter((room) => room.available === true);
@@ -52,10 +54,10 @@ const Booking = () => {
   }
 
   async function handlePayment(number, type) {
-    setRoomNumber(number)
-    setRoomType(type)
+    setRoomNumber(number);
+    setRoomType(type);
     let id = 0;
-    console.log(type)
+    console.log(type);
     if (type === "Standard") {
       id = 1;
     } else if (type === "Deluxe") {
@@ -68,7 +70,7 @@ const Booking = () => {
       id = 5;
     } else {
       alert("Error Finding Room Type");
-      window.location.href = "/booking";
+      navigate("/booking");
     }
 
     const checkInDate = new Date(checkIn);
@@ -105,31 +107,44 @@ const Booking = () => {
   }
 
   async function handleBook() {
-    try {
-      const response = await fetch("https://hotel-haven.onrender.com/booked", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: userData._id,
-          roomNumber: roomNumber,
-          name: userData.name,
-          adults: numberOfAdults,
-          children: numberOfChildren,
-          checkIn: checkIn,
-          checkOut: checkOut,
-          roomType: roomType,
-        }),
-      });
+    const searchParams = new URLSearchParams(window.location.search);
+    const payment = searchParams.get("payment");
 
-      const data = await response.json();
-      if (data) {
-      } else {
-        console.log(response);
+    if (payment === "success") {
+      alert("Payment successful");
+      try {
+        const response = await fetch(
+          "https://hotel-haven.onrender.com/room/booked",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: userData._id,
+              roomNumber: roomNumber,
+              name: userData.name,
+              adults: numberOfAdults,
+              children: numberOfChildren,
+              checkIn: checkIn,
+              checkOut: checkOut,
+              roomType: roomType,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        if (data) {
+          console.log(data);
+        } else {
+          console.log(response);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else if (payment === "cancel") {
+      alert("Payment unsuccessful please try again!");
+      navigate("/booking");
     }
   }
 
@@ -141,39 +156,31 @@ const Booking = () => {
     }
   }
 
-  const [modalIsOpen, setModalIsOpen] = useState(Array(serverData.length).fill(false));
+  const [modalIsOpen, setModalIsOpen] = useState(
+    Array(serverData.length).fill(false)
+  );
 
   const openModal = (index) => {
     setModalIsOpen((prevState) => {
-      const newState = [...prevState]
-      newState[index] = true
-      return newState
-    })
-  }
+      const newState = [...prevState];
+      newState[index] = true;
+      return newState;
+    });
+  };
 
   const closeModal = (index) => {
     setModalIsOpen((prevState) => {
-      const newState = [...prevState]
-      newState[index] = false
-      return newState
-    })
-  }
-
-  const handleBookFunction = handleBook
+      const newState = [...prevState];
+      newState[index] = false;
+      return newState;
+    });
+  };
 
   useEffect(() => {
     getRooms();
     getUserData();
-    const searchParams = new URLSearchParams(window.location.search);
-    const payment = searchParams.get("payment");
-
-    if (payment === "success") {
-      alert("Payment successful");
-      handleBookFunction();
-    } else if (payment === "cancel") {
-      alert("Payment unsuccessful please try again!");
-    }
-  }, [handleBookFunction]);
+    handleBook();
+  }, []);
 
   return (
     <>
@@ -232,7 +239,11 @@ const Booking = () => {
                           >
                             <i class="fa-solid fa-file-pen me-2"></i>Book
                           </button>
-                          <Modal show={modalIsOpen[index]} onHide={() => closeModal(index)} centered>
+                          <Modal
+                            show={modalIsOpen[index]}
+                            onHide={() => closeModal(index)}
+                            centered
+                          >
                             <Modal.Header closeButton>
                               <Modal.Title>Booking: {room.type}</Modal.Title>
                             </Modal.Header>

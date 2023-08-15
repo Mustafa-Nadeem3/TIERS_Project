@@ -119,10 +119,10 @@ const AdminDashboard = () => {
         path1="/admin_dashboard"
         icon2="fa-solid fa-user"
         link2="Users"
-        path2="/users"
+        path2="/admin_user"
         icon3="fa-solid fa-bed"
         link3="Rooms"
-        path3="/booking"
+        path3="/admin_room"
       />
       <section id="admin">
         <div className="container-fluid">

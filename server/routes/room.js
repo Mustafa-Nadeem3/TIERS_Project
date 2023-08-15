@@ -33,9 +33,12 @@ router.post("/booked", async (req, res) => {
       roomType: req.body.roomType,
     });
 
+    console.log(booked)
+
     res.json({ status: "ok", booked: booked });
   } catch (error) {
     console.error("Room Booked error:", error);
+    console.log(error)
     res.status(500).json({ status: "error", message: "An error occurred" });
   }
 });

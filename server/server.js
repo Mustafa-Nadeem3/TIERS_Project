@@ -17,7 +17,7 @@ app.use("/", indexRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/user", userRouter);
-app.use("/room", roomRouter)
+app.use("/room", roomRouter);
 app.use("/payment", paymentRouter);
 
 const PORT = process.env.PORT || 5000;

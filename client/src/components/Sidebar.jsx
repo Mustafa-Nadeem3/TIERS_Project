@@ -3,10 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function Sidebar(props) {
-  const [showBar, setShowBar] = useState(false);
   const navigate = useNavigate();
-
   const [serverData, setServerData] = useState("");
+  const [showBar, setShowBar] = useState(false);
 
   async function getUserData() {
     try {
@@ -23,26 +22,21 @@ function Sidebar(props) {
       } else {
         alert("Error Finding User");
         localStorage.remove("token");
-        navigate("https://hotel-haven.netlify.app/login");
+        navigate("/login");
       }
     } catch (error) {
       console.error("Network error:", error);
     }
   }
 
-  const getUserDataFunction = getUserData;
-
   useEffect(() => {
-    getUserDataFunction();
-  }, [getUserDataFunction]);
+    getUserData();
+  }, []);
 
   const showSidebarContent = () => {
     if (showBar === false) {
       const element = document.getElementById("sidebar");
-      element.style.width = "15vw";
-      const element1 = document.getElementById("content");
-      element1.style.width = "85vw";
-      element1.style.marginLeft = "12rem";
+      element.style.width = "20vw";
       const element2 = document.getElementById("image");
       element2.style.width = "10vw";
       element2.style.height = "10vh";
@@ -60,9 +54,6 @@ function Sidebar(props) {
     } else {
       const element = document.getElementById("sidebar");
       element.style.width = "5vw";
-      const element1 = document.getElementById("content");
-      element1.style.width = "95vw";
-      element1.style.marginLeft = "1rem";
       const element2 = document.getElementById("image");
       element2.style.width = "40px";
       element2.style.height = "40px";
