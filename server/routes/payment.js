@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const stripe = require("stripe")(
-  "sk_test_51Ne1tVHwxP60IDF4kCPimjoqxQe0sfJwmE7MHSGbK3e7w2mMHmM1Ntpnz0ANWrXGr9o5QC6TLQkafjXMnZOaT6oO00eIGuB1ne"
-);
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const storeItems = new Map([
   [1, { name: "Standard", price: 150000 }],
@@ -51,7 +49,5 @@ router.post("/", async (req, res) => {
     res.status(500).json({ status: "error", message: "An error occurred" });
   }
 });
-
-
 
 module.exports = router;
