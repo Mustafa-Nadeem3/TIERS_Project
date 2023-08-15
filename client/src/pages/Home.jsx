@@ -62,15 +62,18 @@ const Home = () => {
 
   async function getComments() {
     try {
-      const response = await fetch("https://hotel-haven.onrender.com/comments", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://hotel-haven.onrender.com/comment/all_comments",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       if (data) {
-        setServerData(data.comments);
+        setServerData(data.comment);
       } else {
         alert("Error" + response);
         console.log(response);
@@ -886,36 +889,37 @@ const Home = () => {
                 data-bs-ride="carousel"
               >
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <div className="col-12 text-center">
-                      <h3>{serverData.name || "No Name Found"}</h3>
-                    </div>
-                    <div className="col-6 mx-auto">
-                      <div className="quote-alt">
-                        <img
-                          src={process.env.PUBLIC_URL + "/images/quote.png"}
-                          alt="Quote Left"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <h6>{serverData.comment|| "No Comment Found"}</h6>
-                      </div>
-                      <div className="text-end">
-                        <img
-                          src={process.env.PUBLIC_URL + "/images/quote.png"}
-                          alt="Quote Right"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-12 text-center">
-                      <p>{serverData.stars || "No Stars Found"}</p>
-                    </div>
-                  </div>
-                  {/* {serverData && serverData.length > 0 ? (
+                  {serverData && serverData.length > 0 ? (
                     serverData.map((data, index) => (
-
+                      <div key={index} class="carousel-item active">
+                        <div className="col-12 text-center">
+                          <h3>{data.name || "No Name Found"}</h3>
+                        </div>
+                        <div className="col-6 mx-auto">
+                          <div className="quote-alt">
+                            <img
+                              src={process.env.PUBLIC_URL + "/images/quote.png"}
+                              alt="Quote Left"
+                            />
+                          </div>
+                          <div className="text-center">
+                            <h6>{data.comment || "No Comment Found"}</h6>
+                          </div>
+                          <div className="text-end">
+                            <img
+                              src={process.env.PUBLIC_URL + "/images/quote.png"}
+                              alt="Quote Right"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-12 text-center">
+                          <p>{data.stars || "No Stars Found"}</p>
+                        </div>
+                      </div>
                     ))
-                  ):(<h6>No data found</h6>)} */}
+                  ) : (
+                    <h6>No data found</h6>
+                  )}
                   <div class="carousel-item">
                     <div className="col-12 text-center">
                       <h3>Name</h3>

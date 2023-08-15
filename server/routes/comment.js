@@ -16,4 +16,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/all_comments", async (req, res) => {
+  try {
+    const comment = await Comment.find({});
+
+    res.json({ status: "ok", comment: comment });
+  } catch (error) {
+    res.json({ status: "error", error: error });
+  }
+});
+
 module.exports = router;

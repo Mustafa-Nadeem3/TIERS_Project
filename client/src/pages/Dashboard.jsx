@@ -20,8 +20,6 @@ const Dashboard = () => {
         console.log(data);
       } else {
         alert("Error Finding User");
-        localStorage.remove("token");
-        navigate("/login");
       }
     } catch (error) {
       console.error("Network error:", error);
@@ -138,7 +136,7 @@ const Dashboard = () => {
                     <label for="star1" title="Very Poor"></label>
                   </div>
                   <div class="text-center">
-                    <button id="submit" type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                       Submit
                     </button>
                   </div>
