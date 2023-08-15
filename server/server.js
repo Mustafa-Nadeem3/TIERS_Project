@@ -11,6 +11,7 @@ const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const userRouter = require("./routes/user");
 const roomRouter = require("./routes/room");
+const commentRouter = require("./routes/comment");
 const paymentRouter = require("./routes/payment");
 
 app.use("/", indexRouter);
@@ -18,6 +19,7 @@ app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/user", userRouter);
 app.use("/room", roomRouter);
+app.use("/comment", commentRouter);
 app.use("/payment", paymentRouter);
 
 const PORT = process.env.PORT || 5000;
