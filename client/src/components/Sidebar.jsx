@@ -10,7 +10,7 @@ function Sidebar(props) {
 
   async function getUserData() {
     try {
-      const response = await fetch("http://localhost:5000/user", {
+      const response = await fetch("https://hotel-haven.onrender.com/user", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -23,7 +23,7 @@ function Sidebar(props) {
       } else {
         alert("Error Finding User");
         localStorage.remove("token");
-        navigate("/login");
+        navigate("https://hotel-haven.netlify.app/login");
       }
     } catch (error) {
       console.error("Network error:", error);

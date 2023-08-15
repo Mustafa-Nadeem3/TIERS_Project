@@ -127,10 +127,10 @@ const Account = () => {
 
       if (data.user === true) {
         if (data.type === "admin") {
-          window.location.href = "/admin_dashboard";
+          window.location.href = "https://hotel-haven.netlify.app/admin_dashboard";
         } else {
           localStorage.setItem("token", data.token);
-          window.location.href = "/dashboard";
+          window.location.href = "https://hotel-haven.netlify.app/dashboard";
         }
       } else if (data.user === false) {
         const passwordInput = document.getElementById("password");
