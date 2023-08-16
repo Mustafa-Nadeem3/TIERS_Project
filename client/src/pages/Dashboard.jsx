@@ -82,7 +82,7 @@ const Dashboard = () => {
             <div className="col-12 p-3 d-flex justify-content-center align-items-center">
               <div className="col-6 text-center">
                 <h4 className="mb-3">Leave A Comment</h4>
-                <form onSubmit={addComment}>
+                <form onSubmit={addComment()}>
                   <div class="form-floating mb-3">
                     <textarea
                       class="form-control"
@@ -97,7 +97,6 @@ const Dashboard = () => {
                     <input
                       type="radio"
                       id="star5"
-                      name="rating"
                       value="5"
                       onChange={handleRatingChange}
                     />
@@ -105,7 +104,6 @@ const Dashboard = () => {
                     <input
                       type="radio"
                       id="star4"
-                      name="rating"
                       value="4"
                       onChange={handleRatingChange}
                     />
@@ -113,7 +111,6 @@ const Dashboard = () => {
                     <input
                       type="radio"
                       id="star3"
-                      name="rating"
                       value="3"
                       onChange={handleRatingChange}
                     />
@@ -121,7 +118,6 @@ const Dashboard = () => {
                     <input
                       type="radio"
                       id="star2"
-                      name="rating"
                       value="2"
                       onChange={handleRatingChange}
                     />
@@ -129,7 +125,6 @@ const Dashboard = () => {
                     <input
                       type="radio"
                       id="star1"
-                      name="rating"
                       value="1"
                       onChange={handleRatingChange}
                     />

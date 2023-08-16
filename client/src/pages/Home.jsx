@@ -913,63 +913,23 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="col-12 text-center">
-                          <p>{data.stars || "No Stars Found"}</p>
+                          {data.stars ? (
+                            <p>
+                              {Array.from({ length: data.stars }).map(
+                                (_, index) => (
+                                  <span key={index} className="rating fs-2"></span>
+                                )
+                              )}
+                            </p>
+                          ) : (
+                            <p>No Stars Found</p>
+                          )}
                         </div>
                       </div>
                     ))
                   ) : (
                     <h6>No data found</h6>
                   )}
-                  <div class="carousel-item">
-                    <div className="col-12 text-center">
-                      <h3>Name</h3>
-                    </div>
-                    <div className="col-6 mx-auto">
-                      <div className="quote-alt">
-                        <img
-                          src={process.env.PUBLIC_URL + "/images/quote.png"}
-                          alt="Quote Left"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <h6>Comment1</h6>
-                      </div>
-                      <div className="text-end">
-                        <img
-                          src={process.env.PUBLIC_URL + "/images/quote.png"}
-                          alt="Quote Right"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-12 text-center">
-                      <p>Stars</p>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div className="col-12 text-center">
-                      <h3>Name</h3>
-                    </div>
-                    <div className="col-6 mx-auto">
-                      <div className="quote-alt">
-                        <img
-                          src={process.env.PUBLIC_URL + "/images/quote.png"}
-                          alt="Quote Left"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <h6>Comment2</h6>
-                      </div>
-                      <div className="text-end">
-                        <img
-                          src={process.env.PUBLIC_URL + "/images/quote.png"}
-                          alt="Quote Right"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-12 text-center">
-                      <p>Stars</p>
-                    </div>
-                  </div>
                 </div>
                 <button
                   class="carousel-control-prev"

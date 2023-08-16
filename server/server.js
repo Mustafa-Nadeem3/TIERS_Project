@@ -7,6 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 const indexRouter = require("./routes/index");
+const newsletterRouter = require("./routes/newsletter");
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const userRouter = require("./routes/user");
@@ -15,6 +16,7 @@ const commentRouter = require("./routes/comment");
 const paymentRouter = require("./routes/payment");
 
 app.use("/", indexRouter);
+app.use("/newsletter", newsletterRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/user", userRouter);

@@ -19,7 +19,7 @@ const Profile = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     editProfile();
     setProfile();
   };
@@ -135,7 +135,7 @@ const Profile = () => {
               <h4>Edit Profile</h4>
             </div>
             <div className="col-12 p-3">
-              <form action="">
+              <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="col-12 mb-3">
                   <img
                     src={
@@ -198,7 +198,6 @@ const Profile = () => {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    onClick={handleClick}
                   >
                     Update
                   </button>
