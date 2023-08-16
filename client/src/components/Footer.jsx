@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [email, setEmail] = useState("")
+
+  async function sendEmail() {
+    try {
+      const response = await fetch(
+        "https://hotel-haven.onrender.com/newsletter",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email }),
+        }
+      );
+
+      const data = await response.json();
+      if (data) {
+        console.log(data.email)
+      } else {
+        alert("Error" + response);
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <section id="footer">
@@ -49,66 +76,76 @@ const Footer = () => {
             <div class="col-lg-2 col-sm-12 mb-lg-0 me-3">
               <h2 className="text-white text-center">Links</h2>
               <ul class="list-unstyled">
-                <li
-                  className="d-flex"
-                >
+                <li className="d-flex">
                   <Link to="#home" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>Home</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Home</span>
                   </Link>
                 </li>
-                <li
-                  className="d-flex"
-                >
-                  <Link to="#about" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>About</span>
+                <li className="d-flex">
+                  <Link
+                    to="#about"
+                    class="fs-5 text-decoration-none text-white"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>About</span>
                   </Link>
                 </li>
-                <li
-                  className="d-flex"
-                >
+                <li className="d-flex">
                   <Link to="#room" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>Rooms</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Rooms</span>
                   </Link>
                 </li>
-                <li
-                  className="d-flex"
-                >
-                  <Link to="#services" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>Services</span>
+                <li className="d-flex">
+                  <Link
+                    to="#services"
+                    class="fs-5 text-decoration-none text-white"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Services</span>
                   </Link>
                 </li>
-                <li
-                  className="d-flex"
-                >
-                  <Link to="#comment" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>Comments</span>
+                <li className="d-flex">
+                  <Link
+                    to="#comment"
+                    class="fs-5 text-decoration-none text-white"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Comments</span>
                   </Link>
                 </li>
-                <li
-                  className="d-flex"
-                >
-                  <Link to="/rooms" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>Book Now</span>
+                <li className="d-flex">
+                  <Link
+                    to="/rooms"
+                    class="fs-5 text-decoration-none text-white"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Book Now</span>
                   </Link>
                 </li>
-                <li
-                  className="d-flex"
-                >
-                  <Link to="/login" class="fs-5 text-decoration-none text-white">
-                  <i class="fa-solid fa-arrow-right"></i><span>Login</span>
+                <li className="d-flex">
+                  <Link
+                    to="/login"
+                    class="fs-5 text-decoration-none text-white"
+                  >
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Login</span>
                   </Link>
                 </li>
               </ul>
             </div>
             <div class="col-lg-4 col-sm-12 text-center">
               <h2 class="mb-3 text-white">Sign Up for Our Newsletter</h2>
-              <form action="">
+              <form onSubmit={sendEmail()}>
                 <div class="form-floating mb-3">
                   <input
                     type="email"
                     class="form-control"
                     id="floatingInput"
                     placeholder="Enter Email Address"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
                   />
                   <label for="floatingInput">Email Address</label>
                 </div>
@@ -125,8 +162,7 @@ const Footer = () => {
             <hr class="my-3" />
             <div class="col-12 d-flex justify-content-center mb-0">
               <p className="text-white">
-                © All Rights Reserved by Hotel Haven. Powered by Mustafa
-                Nadeem
+                © All Rights Reserved by Hotel Haven. Powered by Mustafa Nadeem
               </p>
             </div>
           </div>
